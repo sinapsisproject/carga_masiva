@@ -8,4 +8,21 @@
     <button type="submit">Cargar Excel</button>
 </form>
 
+
+<div class="row">
+    <div class="col-3">
+        <p>Nombre CELDA[A]</p>
+    </div>
+    <div class="col-3">
+        <p>Apellido CELDA[B]</p>
+    </div>
+    <div class="col-3">
+        <p>Correo CELDA[C]</p>
+    </div>
+    <div class="col-3">
+        <p>Clave CELDA[D]</p>
+    </div>
+</div>
+
+
 </div>

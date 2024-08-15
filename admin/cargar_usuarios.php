@@ -26,14 +26,14 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
 
         }else{
 
-            $nombre = explode(" " , $row["A"]); 
+            //$nombre = explode(" " , $row["A"]); 
 
             $user_data = array(
-                'user_login'    => $row["B"],
-                'user_pass'     => 'endo20248',
-                'user_email'    => $row["B"],
-                'first_name'    => $nombre[0],
-                'last_name'     => $nombre[1],
+                'user_login'    => $row["C"], //email
+                'user_pass'     => $row["D"], // password
+                'user_email'    => $row["C"], //email
+                'first_name'    => $row["A"], //nombre
+                'last_name'     => $row["B"], //apellido
                 'role'          => 'subscriber'
             );
 
@@ -41,9 +41,9 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
 
             if ( ! is_wp_error( $user_id ) ) {
                 update_user_meta( $user_id, 'show_admin_bar_front', 'false' );
-                array_push($usuarios_ingresados , $row["B"]);
+                array_push($usuarios_ingresados , $row["C"]);
             } else {
-                array_push($usuarios_error , $row["B"]);
+                array_push($usuarios_error , $row["C"]);
             }
 
         }
