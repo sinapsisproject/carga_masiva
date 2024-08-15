@@ -5,9 +5,13 @@ jQuery(document).ready( function(){
         e.preventDefault();
 
         var file_data = jQuery('#excel-file').prop('files')[0];
+        var id_curso  = jQuery('#id_curso').val();
+
+        console.log(id_curso);
 
         var form_data = new FormData();                  
         form_data.append('excel_file', file_data);
+        form_data.append('id_curso' , id_curso);
         form_data.append('action', 'process_excel_upload'); 
 
 

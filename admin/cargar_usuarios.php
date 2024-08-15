@@ -5,6 +5,7 @@ require(dirname(__FILE__) .'/../../../../wp-load.php');
 
 if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     $file = $_FILES['excel_file']['tmp_name'];
+    $id_curso = $_POST["id_curso"];
 
     require 'librerias/vendor/autoload.php';
 
@@ -47,13 +48,13 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
 
                 $usuarios_ingresados["wp"] = "Ingresado";
             
-
                 $body = [
                     "primer_nombre" => $row["A"],
                     "apellido"      => $row["B"],
                     "username"      => $row["C"],
                     "email"         => $row["C"],
                     "password"      => $row["D"],
+                    "id_curso"      => $id_curso
                 ];
 
                 $response = RfCoreCurl::curl('/api/users/register_user_masive' , 'POST' , NULL , $body);
@@ -73,8 +74,6 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
         }
 
         array_push($data , $usuarios_ingresados);
-
-
     }
 
     wp_send_json(array(

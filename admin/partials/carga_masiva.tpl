@@ -4,7 +4,11 @@
 <div class="col-12">
     
 <form id="upload-excel-form" enctype="multipart/form-data">
+    <p>Archivo</p>
     <input type="file" id="excel-file" name="excel_file" accept=".xls,.xlsx,.csv" />
+    <p>id curso</p>
+    <input id="id_curso" type="text">
+    <br><br>
     <button type="submit">Cargar Excel</button>
 </form>
 
