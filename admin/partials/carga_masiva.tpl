@@ -9,6 +9,13 @@
     <p>id curso</p>
     <input id="id_curso" type="text">
     <br><br>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="true" id="asociar">
+        <label class="form-check-label" for="flexCheckDefault">
+            Solo asociar curso
+        </label>
+    </div>
+    <br><br>
     <button type="submit">Cargar Excel</button>
 </form>
 

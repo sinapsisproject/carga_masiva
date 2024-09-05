@@ -6,6 +6,7 @@ require(dirname(__FILE__) .'/../../../../wp-load.php');
 if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     $file = $_FILES['excel_file']['tmp_name'];
     $id_curso = $_POST["id_curso"];
+    $asociar = $_POST["asociar"];
 
     require 'librerias/vendor/autoload.php';
 
@@ -15,7 +16,10 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     $usuarios_ingresados = [];
     $data = [];
 
-    // Procesar los datos del Excel
+
+    if($asociar == false){
+
+         // Procesar los datos del Excel
     foreach ($sheetData as $row) {
         
         if (array_filter($row) === []) {
@@ -79,6 +83,44 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     wp_send_json(array(
         "response" => $data
     ));
+
+
+    }else if($asociar == true){
+
+        foreach ($sheetData as $row) {
+        
+            if (array_filter($row) === []) {
+                break; // Salir del bucle si toda la fila es null
+            }
+            
+            $usuarios_ingresados["user"] = $row["C"];
+
+            $body = [
+                "email"         => $row["C"],
+                "id_curso"      => $id_curso
+            ];
+
+            $response = RfCoreCurl::curl('/api/users/asociar_usuario_curso' , 'POST' , NULL , $body);
+
+            if($response->status == "true"){
+                $usuarios_ingresados["bd"] = "Ingresado";
+            }else if($response->status == "false"){
+                $usuarios_ingresados["bd"] = "Revisar";
+            }
+
+            array_push($data , $usuarios_ingresados);
+        }
+
+        wp_send_json(array(
+            "response" => $data
+        ));
+        
+    }
+
+    
+   
+
+    
 
 } else {
     wp_send_json_error('No se pudo cargar el archivo.');
