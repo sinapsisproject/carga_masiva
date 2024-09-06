@@ -17,7 +17,7 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     $data = [];
 
 
-    if($asociar == false){
+    if($asociar == "false"){
 
          // Procesar los datos del Excel
     foreach ($sheetData as $row) {
@@ -85,7 +85,7 @@ if (isset($_FILES['excel_file']) && !empty($_FILES['excel_file']['tmp_name'])) {
     ));
 
 
-    }else if($asociar == true){
+    }else if($asociar == "true"){
 
         foreach ($sheetData as $row) {
         
